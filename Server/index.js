@@ -10,6 +10,7 @@ connect();
 const port = process.env.PORT;
 app.use(express.json());
 app.use(cors());
+app.use("/api/blogs",require("./Blog"))
 
 app.get("/", (req, res) => {
 	res.send("<h1>App is live<h1>");
