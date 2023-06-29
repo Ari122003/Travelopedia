@@ -69,3 +69,15 @@ body {
 	-webkit-text-stroke-color: transparent;
 	-webkit-text-stroke-width: var(--stroke-width);
   }
+
+  .blog{
+	background-color: #05386b;
+	color: #EDF5E1;
+  }
+
+
+  /* ACCOUNT */
+
+  .img{
+	border-radius: 100%;
+  }
