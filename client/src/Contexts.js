@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 export const context = React.createContext();
 
-const BlogContext = (props) => {
+function BlogContext(props) {
 	const Blogs = [];
 	const [blogs, setblogs] = useState(Blogs);
 
@@ -23,10 +23,15 @@ const BlogContext = (props) => {
 			});
 	};
 
-	return <context.Provider value={{
-        blogs,getblogs
-    }}></context.Provider>;
-};
+	return (
+		<context.Provider
+			value={{
+				blogs,
+				getblogs,
+			}}>
+			{props.children}
+		</context.Provider>
+	);
+}
 
-
-export default BlogContext
+export default BlogContext;
