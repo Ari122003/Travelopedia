@@ -21,7 +21,7 @@ export default function Navbar() {
 					</svg>
 					<span class="ml-3 name">Travelopedia</span>
 				</a>
-				<nav class="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-700	flex flex-wrap items-center text-base justify-center">
+				<nav class="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-100	flex flex-wrap items-center text-base justify-center">
 					<Link
 						className={`${
 							location.pathname === "/" ? "font-extrabold underline" : ""
