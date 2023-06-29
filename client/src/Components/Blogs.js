@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Blogs() {
 	return (
-		<div className="container px-5">
+		<div className="container px-5 py-10">
 			<section class="text-gray-400 bg-gray-900 body-font">
 				<div class="container px-5 py-24 mx-auto flex flex-col">
 					<div class="lg:w-4/6 mx-auto">

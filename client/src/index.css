@@ -40,3 +40,32 @@ body {
   box-shadow: 5px 5px #379683;
   
 }
+
+
+/* BLOG */
+
+@use postcss-preset-env {
+	stage: 0;
+  }
+  
+  :root {
+	--color-background: #EDF5E1;
+	--stroke-width: calc(1em / 16);
+	--font-size: 30vmin;
+	--font-weight: 700;
+	--letter-spacing: calc(1em / 8);
+  }
+  
+  
+  
+  #blog {
+	background-clip: text;
+	background-image: linear-gradient(to right,  #05386b, #379683, #0e584a, #126fcb);
+	color: var(--color-background);
+	font-size: 70px;
+	font-weight: var(--font-weight);
+	letter-spacing: var(--letter-spacing);
+	padding: calc(--stroke-width / 2);
+	-webkit-text-stroke-color: transparent;
+	-webkit-text-stroke-width: var(--stroke-width);
+  }
