@@ -1,7 +1,11 @@
 import React from 'react'
+import Blogs from './Blogs'
 
 export default function Home() {
   return (
-    <div>Home</div>
+   <div className="container">
+    BLOGS
+    <Blogs/>
+   </div>
   )
 }

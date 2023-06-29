@@ -5,83 +5,65 @@ import { useLocation } from "react-router-dom";
 export default function Navbar() {
 	let location = useLocation();
 	return (
-		<nav className="navbar navbar-expand-lg  " id="nav">
-			<div className="container-fluid">
-				<div className="tw-flex  tw-font-medium tw-items-center  tw-justify-center tw-text-white">
-					<img src="logo.jpg" id="logo" />
-
-					<ul>
-						<li className="navbar-brand tw-ml-3 ">
-							<h2 className="name">Travelopedia</h2>
-						</li>
-					</ul>
-				</div>
-				<button
-					className="navbar-toggler tw-bg-slate-500"
-					type="button"
-					data-bs-toggle="collapse"
-					data-bs-target="#navbarNav"
-					aria-controls="navbarNav"
-					aria-expanded="false"
-					aria-label="Toggle navigation">
-					<span className="navbar-toggler-icon"></span>
-				</button>
-				<div className="collapse navbar-collapse" id="navbarNav">
-					<ul className="navbar-nav">
-						<li className="nav-item ">
-							<Link
-								className={`nav-link ${
-									location.pathname === "/" ? "tw-font-extrabold" : ""
-								}`}
-								aria-current="page"
-								to="/"
-								id="navlink">
-								Home
-							</Link>
-						</li>
-						<li className="nav-item">
-							<Link
-								className={`nav-link ${
-									location.pathname === "/about" ? "tw-font-extrabold" : ""
-								} `}
-								to="/about"
-								id="navlink">
-								About
-							</Link>
-						</li>
-						<li className="nav-item">
-							<Link
-								className={`nav-link ${
-									location.pathname === "/login" ? "tw-font-extrabold" : ""
-								}  `}
-								to="/login"
-								id="navlink">
-								Login
-							</Link>
-						</li>
-						<li className="nav-item">
-							<Link
-								className={`nav-link ${
-									location.pathname === "/signup" ? "tw-font-extrabold" : ""
-								}  `}
-								to="/signup"
-								id="navlink">
-								Signup
-							</Link>
-						</li>
-						<li className="nav-item">
-							<Link
-								className={`nav-link ${
-									location.pathname === "/profile" ? "tw-font-extrabold" : ""
-								}  `}
-								to="/profile"
-								id="navlink">
-								Your profile
-							</Link>
-						</li>
-					</ul>
-				</div>
+		<header class=" body-font" id="nav">
+			<div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+				<a class="flex title-font font-medium items-center text-white mb-4 md:mb-0">
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						fill="none"
+						stroke="currentColor"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full"
+						viewBox="0 0 24 24">
+						<path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+					</svg>
+					<span class="ml-3 name">Travelopedia</span>
+				</a>
+				<nav class="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-700	flex flex-wrap items-center text-base justify-center">
+					<Link
+						className={`${
+							location.pathname === "/" ? "font-extrabold underline" : ""
+						} mr-5`}
+						to="/"
+						id="navlink">
+						Home
+					</Link>
+					<Link
+						className={`${
+							location.pathname === "/about" ? "font-extrabold underline" : ""
+						} mr-5`}
+						to="/about"
+						id="navlink">
+						About
+					</Link>
+					<Link
+						className={`${
+							location.pathname === "/profile" ? "font-extrabold underline" : ""
+						} mr-5`}
+						to="/profile"
+						id="navlink">
+						Account
+					</Link>
+					<Link
+						className={`${
+							location.pathname === "/login" ? "font-extrabold underline" : ""
+						} mr-5`}
+						to="/login"
+						id="navlink">
+						Login
+					</Link>
+					<Link
+						className={`${
+							location.pathname === "/signup" ? "font-extrabold underline" : ""
+						}mr-5`}
+						to="/signup"
+						id="navlink">
+						Signup
+					</Link>
+				</nav>
 			</div>
-		</nav>
+		</header>
 	);
 }
