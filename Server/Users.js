@@ -5,7 +5,7 @@ const { body, validationResult } = require("express-validator");
 
 // End point for fetching user data
 
-router.get("/fetchuser", async (req, res) => {
+router.post("/fetchuser", async (req, res) => {
 	try {
 		const user = await Users.find({ Token: req.body.Token });
 		res.json(user);
