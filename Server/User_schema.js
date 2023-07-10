@@ -4,17 +4,17 @@ const { Schema } = mongoose;
 const Userschema = new Schema({
 	Token: {
 		type: String,
-		required: true,
 	},
 	Name: {
 		type: String,
-		required: true,
 	},
 	Bio: {
 		type: String,
-		required: true,
 	},
-	
+
+	Image: {
+		type: String,
+	},
 });
 
 module.exports = mongoose.model("Users", Userschema);

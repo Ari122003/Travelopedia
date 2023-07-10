@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 import auth from "./Firebase";
 
 export default function Signup() {
@@ -10,25 +11,36 @@ export default function Signup() {
 		Password: "",
 		cpassword: "",
 	});
-
+	let navigate = useNavigate();
 	const change = (e) => {
 		setdetails({
 			...details,
 			[e.target.name]: e.target.value,
 		});
-
-		console.log(details);
 	};
 
-	const submit = (e) => {
+	const submit = async (e) => {
 		e.preventDefault();
-		createUserWithEmailAndPassword(auth, details.Email, details.Password)
+		await createUserWithEmailAndPassword(auth, details.Email, details.Password)
 			.then((response) => {
-				localStorage.setItem("Token",response._tokenResponse.idToken)
+				localStorage.setItem("Token", response.user.uid);
+				navigate("/");
 			})
 			.catch((error) => {
 				console.log(error);
 			});
+
+		await fetch("http://localhost:8000/api/user/adduser", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				Token: localStorage.getItem("Token"),
+				Name: details.Name,
+				Bio: details.Bio,
+			}),
+		});
 	};
 
 	return (
@@ -36,7 +48,7 @@ export default function Signup() {
 			<form onSubmit={submit}>
 				<div className="card mx-auto">
 					<a className="singup">Sign Up</a>
-					<div className="inputBox">
+					<div className="inputBox1">
 						<input
 							type="text"
 							required="required"
@@ -45,7 +57,7 @@ export default function Signup() {
 						/>
 						<span>Username</span>
 					</div>
-					<div className="inputBox">
+					<div className="inputBox1">
 						<input
 							type="text"
 							required="required"
@@ -54,6 +66,7 @@ export default function Signup() {
 						/>
 						<span>Bio</span>
 					</div>
+					
 					<div className="inputBox1">
 						<input
 							type="email"
@@ -64,7 +77,7 @@ export default function Signup() {
 						<span className="user">Email</span>
 					</div>
 
-					<div className="inputBox">
+					<div className="inputBox1">
 						<input
 							type="password"
 							required="required"
@@ -73,7 +86,7 @@ export default function Signup() {
 						/>
 						<span>Password</span>
 					</div>
-					<div className="inputBox">
+					<div className="inputBox1">
 						<input
 							type="password"
 							required="required"

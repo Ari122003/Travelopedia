@@ -1,22 +1,26 @@
 import React, { useEffect, useState } from "react";
 import Footer from "./Footer";
+import { useLocation, Link } from "react-router-dom";
+
 
 export default function Account() {
-	const [details, setdetails] = useState({ Name: "", Bio: "" });
+	let location = useLocation();
+	const [details, setdetails] = useState({ Name: "", Bio: "", Image: "" });
 	const showuser = async () => {
 		await fetch("http://localhost:8000/api/user/fetchuser", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({ Token: "xyz123" }),
+			body: JSON.stringify({ Token: localStorage.getItem("Token") }),
 		})
 			.then((response) => {
 				return response.json();
 			})
 			.then((result) => {
 				let [user] = result;
-				setdetails({ Name: user.Name, Bio: user.Bio });
+				setdetails({ Name: user.Name, Bio: user.Bio, Image: user.Image });
+				localStorage.setItem("ID", user._id);
 			});
 	};
 
@@ -31,16 +35,20 @@ export default function Account() {
 			</h1>
 			<div className="px-5 py-10 ">
 				<section className=" blog body-font ">
-					<div className="container px-5 py-16 mx-auto flex flex-wrap">
-						<div className="lg:w-1/2 w-full mb-10 lg:mb-0 rounded-lg overflow-hidden">
+					<div className="container px-5 py-16 mx-auto flex flex-wrap items-center">
+						<div className="lg:w-1/2 w-full mb-5 lg:mb-0 rounded-lg overflow-hidden ">
 							<img
 								alt="feature"
-								className="object-cover object-center img"
-								src="https://dummyimage.com/300x300"
+								className="object-cover object-center img mx-auto"
+								src={
+									details.Image
+										? `http://localhost:8000/${details.Image}`
+										: "//dummyimage.com/400x400"
+								}
 							/>
 						</div>
-						<div className="flex flex-col flex-wrap lg:py-6 -mb-10 lg:w-1/2 lg:pl-12 lg:text-left text-center ">
-							<div className="flex flex-col mb-10 lg:items-start items-center">
+						<div className="flex flex-col flex-wrap lg:py-6 -mb-10 lg:w-1/2 lg:pl-12 lg:text-left text-center mx-auto ">
+							<div className="flex flex-col mb-10 lg:items-start ">
 								<div className="flex-grow">
 									<h2 className=" text-4xl title-font font-medium mb-3 ">
 										NAME
@@ -54,10 +62,18 @@ export default function Account() {
 										Bio
 									</h2>
 
-									<p className="leading-relaxed text-lg">
-										{details.Bio}
-									</p>
+									<p className="leading-relaxed text-lg">{details.Bio}</p>
 								</div>
+								<Link
+									className={`${
+										location.pathname === "/editpropfile"
+											? "font-extrabold underline"
+											: ""
+									} mx-auto pt-16`}
+									to="/editprofile"
+									id="navlink">
+									Edit your profile
+								</Link>
 							</div>
 						</div>
 					</div>

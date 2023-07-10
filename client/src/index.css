@@ -93,9 +93,9 @@ body {
 	font-weight: bold;
 	font-size: x-large;
 	margin-top: 1.5em;
-  }
-  
-  .card {
+}
+
+.card {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -106,18 +106,18 @@ body {
 	border-radius: 15px;
 	background: #05386b;
 	box-shadow: 16px 16px 32px #0e584a;
-		
+
 	border-radius: 8px;
-  }
-  
-  .inputBox,
-  .inputBox1 {
+}
+
+.inputBox,
+.inputBox1 {
 	position: relative;
 	width: 250px;
-  }
-  
-  .inputBox input,
-  .inputBox1 input {
+}
+
+.inputBox input,
+.inputBox1 input {
 	width: 100%;
 	padding: 10px;
 	outline: none;
@@ -129,10 +129,10 @@ body {
 	border-bottom: 2px solid #edf5e1;
 	transition: 0.1s;
 	border-bottom-left-radius: 8px;
-  }
-  
-  .inputBox span,
-  .inputBox1 span {
+}
+
+.inputBox span,
+.inputBox1 span {
 	margin-top: 5px;
 	position: absolute;
 	left: 0;
@@ -146,10 +146,10 @@ body {
 	transition: 0.5s;
 	letter-spacing: 3px;
 	border-radius: 8px;
-  }
-  
-  .inputBox input:valid~span,
-  .inputBox input:focus~span {
+}
+
+.inputBox input:valid ~ span,
+.inputBox input:focus ~ span {
 	transform: translateX(113px) translateY(-15px);
 	font-size: 0.8em;
 	padding: 5px 10px;
@@ -157,28 +157,28 @@ body {
 	letter-spacing: 0.2em;
 	color: #05386b;
 	border: 2px;
-  }
-  
-  .inputBox1 input:valid~span,
-  .inputBox1 input:focus~span {
+}
+
+.inputBox1 input:valid ~ span,
+.inputBox1 input:focus ~ span {
 	transform: translateX(156px) translateY(-15px);
 	font-size: 0.8em;
 	padding: 5px 10px;
-	background:#edf5e1;
+	background: #edf5e1;
 	letter-spacing: 0.2em;
 	color: #05386b;
 	border: 2px;
-  }
-  
-  .inputBox input:valid,
-  .inputBox input:focus,
-  .inputBox1 input:valid,
-  .inputBox1 input:focus {
+}
+
+.inputBox input:valid,
+.inputBox input:focus,
+.inputBox1 input:valid,
+.inputBox1 input:focus {
 	border: 2px solid #edf5e1;
 	border-radius: 8px;
-  }
-  
-  .enter {
+}
+
+.enter {
 	height: 45px;
 	width: 100px;
 	border-radius: 5px;
@@ -190,11 +190,39 @@ body {
 	font-size: 10px;
 	letter-spacing: 2px;
 	margin-bottom: 3em;
-	color:#edf5e1 ;
-  }
-  
-  .enter:hover {
+	color: #edf5e1;
+}
+
+.enter:hover {
 	background-color: #edf5e1;
 	color: #05386b;
 	border: 2px solid black;
-  }
+}
+
+/* ICON */
+
+.icon {
+	z-index: 1;
+}
+
+/* FORM */
+.form {
+	background-color: #05386b;
+}
+.title {
+	color: #edf5e1;
+}
+
+.butt {
+	background-color: #edf5e1;
+	color: #05386b;
+}
+
+.butt:hover {
+	background-color: #8ee4af;
+}
+
+.butt:active {
+	background-color: #126fcb;
+	color: #edf5e1;
+}

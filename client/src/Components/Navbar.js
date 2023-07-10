@@ -1,21 +1,34 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { signOut } from "firebase/auth";
+import auth from "./Firebase";
 
 export default function Navbar() {
 	let location = useLocation();
+
+	let navigate = useNavigate();
+
+	const logout = async () => {
+		navigate("/login");
+		localStorage.removeItem("Token");
+		localStorage.removeItem("ID")
+
+		await signOut(auth)
+			.then(() => {})
+			.catch(() => {});
+	};
 	return (
 		<header className=" body-font" id="nav">
 			<div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
 				<a className="flex title-font font-medium items-center text-white mb-4 md:mb-0">
-					
 					<span className="ml-3 name">Travelopedia</span>
 				</a>
 				<nav className="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-100	flex flex-wrap items-center text-base justify-center">
 					<Link
 						className={`${
 							location.pathname === "/" ? "font-extrabold underline" : ""
-						} mr-5`}
+						} ml-5`}
 						to="/"
 						id="navlink">
 						Home
@@ -23,7 +36,7 @@ export default function Navbar() {
 					<Link
 						className={`${
 							location.pathname === "/about" ? "font-extrabold underline" : ""
-						} mr-5`}
+						} ml-5`}
 						to="/about"
 						id="navlink">
 						About
@@ -31,7 +44,7 @@ export default function Navbar() {
 					<Link
 						className={`${
 							location.pathname === "/profile" ? "font-extrabold underline" : ""
-						} mr-5`}
+						} ml-5 ${localStorage.getItem("Token") ? "" : "hidden"}`}
 						to="/profile"
 						id="navlink">
 						Account
@@ -39,7 +52,7 @@ export default function Navbar() {
 					<Link
 						className={`${
 							location.pathname === "/login" ? "font-extrabold underline" : ""
-						} mr-5`}
+						} ml-5 ${localStorage.getItem("Token") ? "hidden" : ""}`}
 						to="/login"
 						id="navlink">
 						Login
@@ -47,11 +60,17 @@ export default function Navbar() {
 					<Link
 						className={`${
 							location.pathname === "/signup" ? "font-extrabold underline" : ""
-						}mr-5`}
+						} ml-5 ${localStorage.getItem("Token") ? "hidden" : ""}`}
 						to="/signup"
 						id="navlink">
 						Signup
 					</Link>
+					<button
+						id="navlink"
+						className={`ml-5 ${localStorage.getItem("Token") ? "" : "hidden"}`}
+						onClick={logout}>
+						Log out
+					</button>
 				</nav>
 			</div>
 		</header>
