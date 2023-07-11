@@ -8,6 +8,7 @@ import Signup from "./Components/Signup.js";
 import About from "./Components/About.js";
 import Editprofile from "./Components/Editprofile";
 import React, { useEffect, useState } from "react";
+import Addblogs from "./Components/Addblogs";
 
 function App() {
 	const [details, setdetails] = useState({
@@ -31,7 +32,6 @@ function App() {
 			});
 	};
 
-	
 	return (
 		<>
 			<Navbar />
@@ -42,10 +42,18 @@ function App() {
 				<Route exact path="/login" element={<Login />} />
 				<Route exact path="/signup" element={<Signup />} />
 				<Route exact path="/about" element={<About />} />
+				<Route exact path="/addblogs" element={<Addblogs />} />
+
 				<Route
 					exact
 					path="/editprofile"
-					element={<Editprofile Name={details.Name} Bio={details.Bio} showuser={showuser}/>}
+					element={
+						<Editprofile
+							Name={details.Name}
+							Bio={details.Bio}
+							showuser={showuser}
+						/>
+					}
 				/>
 			</Routes>
 		</>

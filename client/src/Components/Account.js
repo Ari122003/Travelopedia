@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Footer from "./Footer";
 import { useLocation, Link } from "react-router-dom";
-
+import Button from "@mui/material/Button";
 
 export default function Account() {
 	let location = useLocation();
@@ -69,15 +69,27 @@ export default function Account() {
 										location.pathname === "/editpropfile"
 											? "font-extrabold underline"
 											: ""
-									} mx-auto pt-16`}
-									to="/editprofile"
-									id="navlink">
-									Edit your profile
+									} mx-auto pt-24  `}
+									to="/editprofile">
+									<button class="butt" >
+										<span class="box" style={{backgroundColor:"#8ee4af",color:"#05386b"}}>Edit Profile</span>
+									</button>
 								</Link>
 							</div>
 						</div>
 					</div>
 				</section>
+			</div>
+			<div className=" flex justify-center">
+				<Link
+					className={`${
+						location.pathname === "/addblogs" ? "font-extrabold underline" : ""
+					} mx-auto `}
+					to="/addblogs">
+					<button class="butt">
+						<span class="box  ">ADD BLOGS</span>
+					</button>
+				</Link>
 			</div>
 			<h1 id="blog" className="text-center">
 				Your Blogs
