@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Footer from "./Footer";
 import { useLocation, Link } from "react-router-dom";
-import Button from "@mui/material/Button";
+
 
 export default function Account() {
 	let location = useLocation();
@@ -26,6 +26,7 @@ export default function Account() {
 
 	useEffect(() => {
 		showuser();
+		console.log(details)
 	}, []);
 
 	return (
@@ -71,8 +72,8 @@ export default function Account() {
 											: ""
 									} mx-auto pt-24  `}
 									to="/editprofile">
-									<button class="butt" >
-										<span class="box" style={{backgroundColor:"#8ee4af",color:"#05386b"}}>Edit Profile</span>
+									<button className="butt" >
+										<span className="box" style={{backgroundColor:"#8ee4af",color:"#05386b"}}>Edit Profile</span>
 									</button>
 								</Link>
 							</div>
@@ -86,8 +87,8 @@ export default function Account() {
 						location.pathname === "/addblogs" ? "font-extrabold underline" : ""
 					} mx-auto `}
 					to="/addblogs">
-					<button class="butt">
-						<span class="box  ">ADD BLOGS</span>
+					<button className="butt">
+						<span className="box  ">ADD BLOGS</span>
 					</button>
 				</Link>
 			</div>

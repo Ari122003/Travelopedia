@@ -1,24 +1,26 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Blogs from "./Blogs";
 import Footer from "./Footer";
-import { context } from "../Contexts";
+import { context } from "../Context";
 
 export default function Home() {
-	const { blogs, getblogs } = useContext(context);
+	const { blogs, showblogs } = useContext(context);
 
 	useEffect(() => {
-		getblogs();
+		showblogs();
 	}, []);
 
 	return (
-		<div className="container">
-			<h1 id="blog" className="text-center">
-				Blogs
-			</h1>
-			{blogs.map((item) => {
-				return <Blogs key={item._id} blogs={item} />;
-			})}
+		<>
+			<div className="container">
+				<h1 id="blog" className="text-center">
+					Blogs
+				</h1>
+				{blogs.map((item) => {
+					return <Blogs key={item._id} blogs={item} />;
+				})}
+			</div>
 			<Footer />
-		</div>
+		</>
 	);
 }

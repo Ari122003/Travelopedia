@@ -95,7 +95,7 @@ router.put(
 	}
 );
 
-// Endpoint for editing a blog
+// Endpoint for delete a blog
 
 router.delete("/deleteblogs", async (req, res) => {
 	try {

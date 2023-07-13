@@ -7,7 +7,7 @@ import Login from "./Components/Login.js";
 import Signup from "./Components/Signup.js";
 import About from "./Components/About.js";
 import Editprofile from "./Components/Editprofile";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Addblogs from "./Components/Addblogs";
 
 function App() {

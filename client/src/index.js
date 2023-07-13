@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import { HashRouter } from "react-router-dom";
-import BlogContext from "./Contexts";
+import BlogContext from "./Context";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

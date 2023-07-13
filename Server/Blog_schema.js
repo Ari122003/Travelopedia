@@ -35,6 +35,11 @@ const Blogsschema = new Schema({
 	id: {
 		type: Number,
 	},
+
+	// Image: {
+	// 	type: String,
+	// 	require: true,
+	// },
 });
 
 module.exports = mongoose.model("Blogs", Blogsschema);
