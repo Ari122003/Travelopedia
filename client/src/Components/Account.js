@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Footer from "./Footer";
 import { useLocation, Link } from "react-router-dom";
-
+import { context } from "../Context";
+import Blogs from "./Blogs";
 
 export default function Account() {
+	const { blogs, showblogs } = useContext(context);
 	let location = useLocation();
 	const [details, setdetails] = useState({ Name: "", Bio: "", Image: "" });
+	const [trigger, settrigger] = useState(false);
 	const showuser = async () => {
 		await fetch("http://localhost:8000/api/user/fetchuser", {
 			method: "POST",
@@ -21,12 +24,20 @@ export default function Account() {
 				let [user] = result;
 				setdetails({ Name: user.Name, Bio: user.Bio, Image: user.Image });
 				localStorage.setItem("ID", user._id);
+			})
+			.catch((error) => {
+				console.log(error);
 			});
 	};
 
 	useEffect(() => {
 		showuser();
-		console.log(details)
+		showblogs();
+		blogs.map((item) => {
+			if (item.Token == localStorage.getItem("Token")) {
+				settrigger(true);
+			}
+		});
 	}, []);
 
 	return (
@@ -72,8 +83,12 @@ export default function Account() {
 											: ""
 									} mx-auto pt-24  `}
 									to="/editprofile">
-									<button className="butt" >
-										<span className="box" style={{backgroundColor:"#8ee4af",color:"#05386b"}}>Edit Profile</span>
+									<button className="butt">
+										<span
+											className="box"
+											style={{ backgroundColor: "#8ee4af", color: "#05386b" }}>
+											Edit Profile
+										</span>
 									</button>
 								</Link>
 							</div>
@@ -93,8 +108,13 @@ export default function Account() {
 				</Link>
 			</div>
 			<h1 id="blog" className="text-center">
-				Your Blogs
+				{trigger == true ? "Your Blogs" : "Add your blogs"}
 			</h1>
+			{blogs.map((item) => {
+				if (item.Token == localStorage.getItem("Token")) {
+					return <Blogs key={item._id} blogs={item} />;
+				}
+			})}
 			<Footer />
 		</>
 	);

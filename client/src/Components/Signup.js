@@ -6,7 +6,7 @@ import auth from "./Firebase";
 export default function Signup() {
 	const [details, setdetails] = useState({
 		Name: "",
-		Bio: "",
+
 		Email: "",
 		Password: "",
 		cpassword: "",
@@ -38,7 +38,6 @@ export default function Signup() {
 			body: JSON.stringify({
 				Token: localStorage.getItem("Token"),
 				Name: details.Name,
-				Bio: details.Bio,
 			}),
 		});
 	};
@@ -57,16 +56,7 @@ export default function Signup() {
 						/>
 						<span>Username</span>
 					</div>
-					<div className="inputBox1">
-						<input
-							type="text"
-							required="required"
-							name="Bio"
-							onChange={change}
-						/>
-						<span>Bio</span>
-					</div>
-					
+
 					<div className="inputBox1">
 						<input
 							type="email"

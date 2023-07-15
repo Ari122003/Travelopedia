@@ -3,6 +3,7 @@ import Blogs from "./Blogs";
 import Footer from "./Footer";
 import { context } from "../Context";
 
+
 export default function Home() {
 	const { blogs, showblogs } = useContext(context);
 

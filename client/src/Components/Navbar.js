@@ -12,14 +12,14 @@ export default function Navbar() {
 	const logout = async () => {
 		navigate("/login");
 		localStorage.removeItem("Token");
-		localStorage.removeItem("ID")
+		localStorage.removeItem("ID");
 
 		await signOut(auth)
 			.then(() => {})
 			.catch(() => {});
 	};
 	return (
-		<header className=" body-font" id="nav">
+		<header className=" sticky top-0 body-font " id="nav">
 			<div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
 				<a className="flex title-font font-medium items-center text-white mb-4 md:mb-0">
 					<span className="ml-3 name">Travelopedia</span>
@@ -73,6 +73,7 @@ export default function Navbar() {
 					</button>
 				</nav>
 			</div>
+			<hr></hr>
 		</header>
 	);
 }

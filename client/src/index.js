@@ -5,11 +5,12 @@ import App from "./App";
 import { HashRouter } from "react-router-dom";
 import BlogContext from "./Context";
 
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
 	<HashRouter basename="/">
 		<BlogContext>
-			<App/>
+			<App />
 		</BlogContext>
 	</HashRouter>
 );

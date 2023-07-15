@@ -7,7 +7,7 @@ const { body, validationResult } = require("express-validator");
 
 router.get("/yourblogs", async (req, res) => {
 	try {
-		const blogs = await Blogs.find({ Token: req.body.token });
+		const blogs = await Blogs.find({ Token: req.body.Token });
 		res.json(blogs);
 	} catch (error) {
 		console.log(error.message);
@@ -31,19 +31,12 @@ router.get("/fetchblogs", async (req, res) => {
 
 router.post(
 	"/addblogs",
-	[body("Experience", "Minimum experience length is 5").isLength({ min: 5 })],
+
 	async (req, res) => {
 		try {
-			const errors = validationResult(req);
-			if (!errors.isEmpty()) {
-				return res.status(400).json({
-					errors: "Enter valid Experience",
-				});
-			}
-
 			const { Token, Place, Cost, Location, Experience, Sites } = req.body;
 
-			const blogs = new Blogs({
+			const newblog = new Blogs({
 				Token,
 				Place,
 				Cost,
@@ -53,11 +46,11 @@ router.post(
 				id: 1,
 			});
 
-			const svaedblogs = await blogs.save();
+			const savedblogs = await newblog.save();
 
-			res.json(svaedblogs);
+			res.json(savedblogs);
 		} catch (error) {
-			console.log(error.message);
+			console.log(error);
 			res.status(500).send("Internal server error");
 		}
 	}

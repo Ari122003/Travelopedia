@@ -19,22 +19,14 @@ router.post("/fetchuser", async (req, res) => {
 
 router.post(
 	"/adduser",
-	[body("Bio", "Minimum Bio length is 5").isLength({ min: 5 })],
+
 	async (req, res) => {
 		try {
-			const errors = validationResult(req);
-			if (!errors.isEmpty()) {
-				return res.status(400).json({
-					errors: "Bio should have atleast 5 caharacter",
-				});
-			}
-
-			const { Token, Name, Bio } = req.body;
+			const { Token, Name } = req.body;
 
 			const user = new Users({
 				Token,
 				Name,
-				Bio,
 			});
 
 			const saveduser = await user.save();
