@@ -9,12 +9,14 @@ import About from "./Components/About.js";
 import Editprofile from "./Components/Editprofile";
 import React, { useState } from "react";
 import Addblogs from "./Components/Addblogs";
+import Editblogs from "./Components/Editblogs";
 
 function App() {
 	const [details, setdetails] = useState({
 		Name: "",
 		Bio: "",
 	});
+
 	const showuser = async () => {
 		await fetch("http://localhost:8000/api/user/fetchuser", {
 			method: "POST",
@@ -43,6 +45,8 @@ function App() {
 				<Route exact path="/signup" element={<Signup />} />
 				<Route exact path="/about" element={<About />} />
 				<Route exact path="/addblogs" element={<Addblogs />} />
+
+				<Route exact path="/editblogs" element={<Editblogs />} />
 
 				<Route
 					exact

@@ -75,7 +75,7 @@ router.put(
 			const newblog = { Place, Cost, Location, Experience, Sites };
 
 			const blog = await Blogs.findByIdAndUpdate(
-				req.body._id,
+				req.body.Id,
 				{ $set: newblog },
 				{ new: true }
 			);

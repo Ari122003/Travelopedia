@@ -6,7 +6,6 @@ import auth from "./Firebase";
 export default function Signup() {
 	const [details, setdetails] = useState({
 		Name: "",
-
 		Email: "",
 		Password: "",
 		cpassword: "",

@@ -5,6 +5,17 @@ const BlogContext = (props) => {
 	const allblogs = [];
 
 	const [blogs, setblogs] = useState(allblogs);
+	const [blog, setblog] = useState({
+		Place: "",
+		Location: "",
+		Experience: "",
+		Cost: new Number(),
+		Place1: "",
+		Place2: "",
+		Place3: "",
+		Place4: "",
+		Id: "",
+	});
 
 	// Fetch all notes
 
@@ -21,6 +32,22 @@ const BlogContext = (props) => {
 			.catch((error) => {
 				console.log(error);
 			});
+	};
+
+	// Show blogs on Editblogs
+
+	const sender = (blog) => {
+		setblog({
+			Place: blog.Place,
+			Location: blog.Location,
+			Experience: blog.Experience,
+			Cost: blog.Cost,
+			Place1: blog.Sites.Place1,
+			Place2: blog.Sites.Place2,
+			Place3: blog.Sites.Place3,
+			Place4: blog.Sites.Place4,
+			Id: blog._id,
+		});
 	};
 
 	// Adding new blogs
@@ -56,7 +83,7 @@ const BlogContext = (props) => {
 	};
 
 	return (
-		<context.Provider value={{ blogs, showblogs, addblogs }}>
+		<context.Provider value={{ blogs, showblogs, addblogs, blog, sender }}>
 			{props.children}
 		</context.Provider>
 	);
