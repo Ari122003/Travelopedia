@@ -36,10 +36,9 @@ const Blogsschema = new Schema({
 		type: Number,
 	},
 
-	// Image: {
-	// 	type: String,
-	// 	require: true,
-	// },
+	Image: {
+		type: String,
+	},
 });
 
 module.exports = mongoose.model("Blogs", Blogsschema);

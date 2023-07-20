@@ -82,8 +82,42 @@ const BlogContext = (props) => {
 			});
 	};
 
+	// Editing blogs
+
+	const editblogs = async (blogs,Image) => {
+		await fetch("http://localhost:8000/api/blogs/editblogs", {
+			method: "PUT",
+			headers: {
+				"Content-Type": "application/json",
+			},
+
+			body: JSON.stringify({
+				Place: blogs.Place,
+				Location: blogs.Location,
+				Experience: blogs.Experience,
+				Cost: blogs.Cost,
+				Id: blogs.Id,
+				Image:Image,
+				Sites: {
+					Place1: blogs.Place1,
+					Place2: blogs.Place2,
+					Place3: blogs.Place3,
+					Place4: blogs.Place4,
+				},
+			}),
+		})
+			.then((res) => {
+				return res.json();
+			})
+			.then(() => {})
+			.catch((error) => {
+				console.log(error);
+			});
+	};
+
 	return (
-		<context.Provider value={{ blogs, showblogs, addblogs, blog, sender }}>
+		<context.Provider
+			value={{ blogs, showblogs, addblogs, blog, sender, editblogs }}>
 			{props.children}
 		</context.Provider>
 	);

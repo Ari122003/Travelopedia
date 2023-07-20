@@ -61,7 +61,11 @@ export default function Editprofile(props) {
 	return (
 		<>
 			<div className="container px-10 py-10">
-				<form onSubmit={submit}>
+				<form
+					onSubmit={submit}
+					action="/upload"
+					method="POST"
+					encType="multipart/form-data">
 					<section className="blog body-font">
 						<div className="container px-5 py-24 mx-auto">
 							<div className="flex items-center lg:w-3/5 mx-auto  pb-10  sm:flex-row flex-col">

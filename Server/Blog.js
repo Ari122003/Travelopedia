@@ -70,9 +70,9 @@ router.put(
 				});
 			}
 
-			const { Place, Cost, Location, Experience, Sites } = req.body;
+			const { Place, Cost, Location, Experience, Sites, Image } = req.body;
 
-			const newblog = { Place, Cost, Location, Experience, Sites };
+			const newblog = { Place, Cost, Location, Experience, Sites, Image };
 
 			const blog = await Blogs.findByIdAndUpdate(
 				req.body.Id,

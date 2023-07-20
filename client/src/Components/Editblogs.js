@@ -1,9 +1,17 @@
 import React, { useContext, useEffect, useState } from "react";
 import Footer from "./Footer";
+import { useNavigate } from "react-router-dom";
 import { context } from "../Context";
+import axios from "axios";
+const FormData = require("form-data");
 
 export default function Editblogs() {
-	const { blog } = useContext(context);
+	const [image, setimage] = useState();
+
+	const { blog, editblogs } = useContext(context);
+
+	const navigate = useNavigate();
+
 	const [blogs, setblogs] = useState({
 		Place: blog.Place,
 		Location: blog.Location,
@@ -23,38 +31,25 @@ export default function Editblogs() {
 		});
 	};
 
+	const fileupdload = (e) => {
+		setimage(e.target.files[0]);
+	};
+
 	const submit = async (e) => {
 		e.preventDefault();
 
-		await fetch("http://localhost:8000/api/blogs/editblogs", {
-			method: "PUT",
-			headers: {
-				"Content-Type": "application/json",
-			},
+		// Image upload
 
-			body: JSON.stringify({
-				Place: blogs.Place,
-				Location: blogs.Location,
-				Experience: blogs.Experience,
-				Cost: blogs.Cost,
-				Id: blogs.Id,
-				Sites: {
-					Place1: blogs.Place1,
-					Place2: blogs.Place2,
-					Place3: blogs.Place3,
-					Place4: blogs.Place4,
-				},
-			}),
-		})
-			.then((res) => {
-				return res.json();
-			})
-			.then((res) => {
-				console.log(res);
-			})
-			.catch((error) => {
-				console.log(error);
-			});
+		const form = new FormData();
+		form.append("file", image);
+
+		await axios.post("http://localhost:8000/upload", form).then((res) => {
+			// Data upload
+
+			editblogs(blogs, res.data.filename);
+		});
+
+		navigate("/profile");
 	};
 
 	return (
@@ -63,7 +58,11 @@ export default function Editblogs() {
 				Edit Blogs
 			</h1>
 			<div className="container px-10 py-10">
-				<form onSubmit={submit}>
+				<form
+					onSubmit={submit}
+					action="/upload"
+					method="POST"
+					encType="multipart/form-data">
 					<section className="blog body-font">
 						<div className="container px-5 py-24 mx-auto">
 							<div className="flex items-center lg:w-3/5 mx-auto  pb-10  sm:flex-row flex-col">
@@ -224,7 +223,11 @@ export default function Editblogs() {
 										Image
 									</h2>
 									<div className="input-container">
-										<input className="input-field" type="file" />
+										<input
+											className="input-field"
+											type="file"
+											onChange={fileupdload}
+										/>
 
 										<span className="input-highlight"></span>
 									</div>

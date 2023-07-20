@@ -4,7 +4,8 @@ import { Link, useLocation } from "react-router-dom";
 import { context } from "../Context";
 
 export default function Blogs(props) {
-	const { Place, Location, Cost, Experience, Sites, Date, Token } = props.blogs;
+	const { Place, Location, Cost, Experience, Sites, Date, Token, Image } =
+		props.blogs;
 
 	const { sender } = useContext(context);
 
@@ -43,7 +44,11 @@ export default function Blogs(props) {
 								<img
 									alt="content"
 									className="object-cover object-center h-full w-full"
-									src="https://dummyimage.com/1200x500"
+									src={
+										Image
+											? `http://localhost:8000/${Image}`
+											: "https://dummyimage.com/1200x500"
+									}
 								/>
 							</div>
 							<div className="flex flex-col sm:flex-row mt-10">
