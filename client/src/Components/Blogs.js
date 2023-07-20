@@ -4,10 +4,10 @@ import { Link, useLocation } from "react-router-dom";
 import { context } from "../Context";
 
 export default function Blogs(props) {
-	const { Place, Location, Cost, Experience, Sites, Date, Token, Image } =
+	const { Place, Location, Cost, Experience, Sites, Date, Token, Image, _id } =
 		props.blogs;
 
-	const { sender } = useContext(context);
+	const { sender, deleteblogs } = useContext(context);
 
 	const location = useLocation();
 
@@ -28,6 +28,10 @@ export default function Blogs(props) {
 				const [user] = res;
 				setuser(user);
 			});
+	};
+
+	const deletee = () => {
+		deleteblogs(_id);
 	};
 
 	useEffect(() => {
@@ -54,7 +58,7 @@ export default function Blogs(props) {
 							<div className="flex flex-col sm:flex-row mt-10">
 								<div className="sm:w-1/3 text-center sm:pr-8 sm:py-8">
 									<div className="w-20 h-20 rounded-full inline-flex items-center justify-center bg-gray-800 text-gray-600">
-										<img src={`http://localhost:8000/${user.Image}`}></img>
+										<img src={`http://localhost:8000/${user.Image}`} alt="Profile pic"></img>
 									</div>
 									<div className="flex flex-col items-center text-center justify-center">
 										<h2 className="font-medium title-font mt-4  text-lg">
@@ -144,7 +148,7 @@ export default function Blogs(props) {
 
 						<div
 							className={`flex justify-center pt-16 items-center ${
-								location.pathname == "/" ? "hidden" : ""
+								location.pathname === "/" ? "hidden" : ""
 							}`}>
 							<Link
 								to="/editblogs"
@@ -158,6 +162,7 @@ export default function Blogs(props) {
 
 							<i
 								className="fa-sharp fa-solid fa-trash fa-2xl pl-10"
+								onClick={deletee}
 								style={{ color: "white" }}></i>
 						</div>
 					</div>

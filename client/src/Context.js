@@ -116,9 +116,39 @@ const BlogContext = (props) => {
 			});
 	};
 
+	// Deleting blogs
+
+	const deleteblogs = async (id) => {
+		await fetch("http://localhost:8000/api/blogs/deleteblogs", {
+			method: "DELETE",
+			headers: {
+				"Content-Type": "application/json",
+			},
+
+			body: JSON.stringify({ id: id }),
+		})
+			.then((res) => {
+				return res.json();
+			})
+			.then((res) => {
+				console.log(res);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	};
+
 	return (
 		<context.Provider
-			value={{ blogs, showblogs, addblogs, blog, sender, editblogs }}>
+			value={{
+				blogs,
+				showblogs,
+				addblogs,
+				blog,
+				sender,
+				editblogs,
+				deleteblogs,
+			}}>
 			{props.children}
 		</context.Provider>
 	);

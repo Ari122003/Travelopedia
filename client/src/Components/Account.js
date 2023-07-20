@@ -34,7 +34,7 @@ export default function Account() {
 		showuser();
 		showblogs();
 		blogs.map((item) => {
-			if (item.Token == localStorage.getItem("Token")) {
+			if (item.Token === localStorage.getItem("Token")) {	
 				settrigger(true);
 			}
 		});
@@ -108,10 +108,10 @@ export default function Account() {
 				</Link>
 			</div>
 			<h1 id="blog" className="text-center">
-				{trigger == true ? "Your Blogs" : "Add your blogs"}
+				{trigger === true ? "Your Blogs" : "Add your blogs"}
 			</h1>
 			{blogs.map((item) => {
-				if (item.Token == localStorage.getItem("Token")) {
+				if (item.Token === localStorage.getItem("Token")) {
 					return <Blogs key={item._id} blogs={item} />;
 				}
 			})}
