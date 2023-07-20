@@ -32,10 +32,6 @@ const Blogsschema = new Schema({
 		default: Date.now,
 	},
 
-	id: {
-		type: Number,
-	},
-
 	Image: {
 		type: String,
 	},

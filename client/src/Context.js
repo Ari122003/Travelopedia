@@ -52,7 +52,7 @@ const BlogContext = (props) => {
 
 	// Adding new blogs
 
-	const addblogs = async (blog) => {
+	const addblogs = async (blog, image) => {
 		await fetch("http://localhost:8000/api/blogs/addblogs", {
 			method: "POST",
 			headers: {
@@ -65,6 +65,7 @@ const BlogContext = (props) => {
 				Location: blog.Location,
 				Experience: blog.Experience,
 				Token: blog.Token,
+				Image: image,
 				Sites: {
 					Place1: blog.Place1,
 					Place2: blog.Place2,
@@ -84,7 +85,7 @@ const BlogContext = (props) => {
 
 	// Editing blogs
 
-	const editblogs = async (blogs,Image) => {
+	const editblogs = async (blogs, image) => {
 		await fetch("http://localhost:8000/api/blogs/editblogs", {
 			method: "PUT",
 			headers: {
@@ -97,7 +98,7 @@ const BlogContext = (props) => {
 				Experience: blogs.Experience,
 				Cost: blogs.Cost,
 				Id: blogs.Id,
-				Image:Image,
+				Image: image,
 				Sites: {
 					Place1: blogs.Place1,
 					Place2: blogs.Place2,

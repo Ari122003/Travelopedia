@@ -3,23 +3,11 @@ const router = express.Router();
 const Blogs = require("./Blog_schema");
 const { body, validationResult } = require("express-validator");
 
-// Endpoint for fetching blogs of an user
-
-router.get("/yourblogs", async (req, res) => {
-	try {
-		const blogs = await Blogs.find({ Token: req.body.Token });
-		res.json(blogs);
-	} catch (error) {
-		console.log(error.message);
-		res.status(500).send("Internal server error");
-	}
-});
-
 // Endponit for fetching all blogs
 
 router.get("/fetchblogs", async (req, res) => {
 	try {
-		const blogs = await Blogs.find({ id: 1 });
+		const blogs = await Blogs.find();
 		res.json(blogs);
 	} catch (error) {
 		console.log(error.message);
@@ -34,7 +22,8 @@ router.post(
 
 	async (req, res) => {
 		try {
-			const { Token, Place, Cost, Location, Experience, Sites } = req.body;
+			const { Token, Place, Cost, Location, Experience, Sites, Image } =
+				req.body;
 
 			const newblog = new Blogs({
 				Token,
@@ -43,7 +32,7 @@ router.post(
 				Location,
 				Experience,
 				Sites,
-				id: 1,
+				Image,
 			});
 
 			const savedblogs = await newblog.save();

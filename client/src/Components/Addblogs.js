@@ -2,10 +2,20 @@ import React, { useContext, useState } from "react";
 import Footer from "./Footer";
 import { context } from "../Context";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+const FormData = require("form-data");
 
 export default function Addblogs() {
 	const { addblogs } = useContext(context);
+
+	const [image, setimage] = useState();
+
+	const fileupdload = (e) => {
+		setimage(e.target.files[0]);
+	};
+
 	let navigate = useNavigate();
+
 	const [blog, setblog] = useState({
 		Place: "",
 		Location: "",
@@ -27,8 +37,17 @@ export default function Addblogs() {
 
 	const submit = async (e) => {
 		e.preventDefault();
-		await addblogs(blog);
-		navigate("/profile");
+
+		//    Image uploda
+
+		const form = new FormData();
+		form.append("file", image);
+
+		await axios.post("http://localhost:8000/upload", form).then((res) => {
+			// Data upload
+			addblogs(blog, res.data.filename);
+			navigate("/profile");
+		});
 	};
 	return (
 		<>
@@ -36,7 +55,11 @@ export default function Addblogs() {
 				Add Blogs
 			</h1>
 			<div className="container px-10 py-10">
-				<form onSubmit={submit}>
+				<form
+					onSubmit={submit}
+					action="/upload"
+					method="POST"
+					encType="multipart/form-data">
 					<section className="blog body-font">
 						<div className="container px-5 py-24 mx-auto">
 							<div className="flex items-center lg:w-3/5 mx-auto  pb-10  sm:flex-row flex-col">
@@ -189,7 +212,11 @@ export default function Addblogs() {
 										Image
 									</h2>
 									<div className="input-container">
-										<input className="input-field" type="file" />
+										<input
+											className="input-field"
+											type="file"
+											onChange={fileupdload}
+										/>
 
 										<span className="input-highlight"></span>
 									</div>
