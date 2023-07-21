@@ -60,13 +60,21 @@ function App() {
 
 			<Routes>
 				<Route exact path="/" element={<Home />} />
-				<Route exact path="/profile" element={<Account />} />
+				<Route exact path="/profile" element={<Account alert={showalert} />} />
 				<Route exact path="/login" element={<Login showalert={showalert} />} />
 				<Route exact path="/signup" element={<Signup />} />
 				<Route exact path="/about" element={<About />} />
-				<Route exact path="/addblogs" element={<Addblogs />} />
+				<Route
+					exact
+					path="/addblogs"
+					element={<Addblogs alert={showalert} />}
+				/>
 
-				<Route exact path="/editblogs" element={<Editblogs />} />
+				<Route
+					exact
+					path="/editblogs"
+					element={<Editblogs alert={showalert} />}
+				/>
 
 				<Route
 					exact

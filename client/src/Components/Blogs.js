@@ -32,6 +32,8 @@ export default function Blogs(props) {
 
 	const deletee = () => {
 		deleteblogs(_id);
+		props.alert("warning", "Successfully deleted");
+		window.location.reload();
 	};
 
 	useEffect(() => {
@@ -58,7 +60,9 @@ export default function Blogs(props) {
 							<div className="flex flex-col sm:flex-row mt-10">
 								<div className="sm:w-1/3 text-center sm:pr-8 sm:py-8">
 									<div className="w-20 h-20 rounded-full inline-flex items-center justify-center bg-gray-800 text-gray-600">
-										<img src={`http://localhost:8000/${user.Image}`} alt="Profile pic"></img>
+										<img
+											src={`http://localhost:8000/${user.Image}`}
+											alt="Profile pic"></img>
 									</div>
 									<div className="flex flex-col items-center text-center justify-center">
 										<h2 className="font-medium title-font mt-4  text-lg">

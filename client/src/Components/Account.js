@@ -4,11 +4,15 @@ import { useLocation, Link } from "react-router-dom";
 import { context } from "../Context";
 import Blogs from "./Blogs";
 
-export default function Account() {
+export default function Account(props) {
 	const { blogs, showblogs } = useContext(context);
+
 	let location = useLocation();
+
 	const [details, setdetails] = useState({ Name: "", Bio: "", Image: "" });
+
 	const [trigger, settrigger] = useState(false);
+
 	const showuser = async () => {
 		await fetch("http://localhost:8000/api/user/fetchuser", {
 			method: "POST",
@@ -34,7 +38,7 @@ export default function Account() {
 		showuser();
 		showblogs();
 		blogs.map((item) => {
-			if (item.Token === localStorage.getItem("Token")) {	
+			if (item.Token === localStorage.getItem("Token")) {
 				settrigger(true);
 			}
 		});
@@ -112,7 +116,7 @@ export default function Account() {
 			</h1>
 			{blogs.map((item) => {
 				if (item.Token === localStorage.getItem("Token")) {
-					return <Blogs key={item._id} blogs={item} />;
+					return <Blogs key={item._id} blogs={item} alert={props.alert} />;
 				}
 			})}
 			<Footer />

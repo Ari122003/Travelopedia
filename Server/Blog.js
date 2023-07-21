@@ -19,9 +19,17 @@ router.get("/fetchblogs", async (req, res) => {
 
 router.post(
 	"/addblogs",
+	[body("Experience", "Minimum experience length is 5").isLength({ min: 5 })],
 
 	async (req, res) => {
 		try {
+			const errors = validationResult(req);
+			if (!errors.isEmpty()) {
+				return res.status(400).json({
+					errors: "Experince must contain 5 character",
+				});
+			}
+
 			const { Token, Place, Cost, Location, Experience, Sites, Image } =
 				req.body;
 

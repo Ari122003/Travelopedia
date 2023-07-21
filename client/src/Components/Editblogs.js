@@ -5,7 +5,7 @@ import { context } from "../Context";
 import axios from "axios";
 const FormData = require("form-data");
 
-export default function Editblogs() {
+export default function Editblogs(props) {
 	const [image, setimage] = useState();
 
 	const { blog, editblogs } = useContext(context);
@@ -24,11 +24,15 @@ export default function Editblogs() {
 		Id: blog.Id,
 	});
 
+	const [error, seterror] = useState(false);
+
 	const change = (e) => {
 		setblogs({
 			...blogs,
 			[e.target.name]: e.target.value,
 		});
+
+		seterror(false);
 	};
 
 	const fileupdload = (e) => {
@@ -38,18 +42,24 @@ export default function Editblogs() {
 	const submit = async (e) => {
 		e.preventDefault();
 
-		// Image upload
+		if (blogs.Experience.length > 5) {
+			// Image upload
 
-		const form = new FormData();
-		form.append("file", image);
+			const form = new FormData();
+			form.append("file", image);
 
-		await axios.post("http://localhost:8000/upload", form).then((res) => {
-			// Data upload
+			await axios.post("http://localhost:8000/upload", form).then((res) => {
+				// Data upload
 
-			editblogs(blogs, res.data.filename);
-		});
+				editblogs(blogs, res.data.filename);
+			});
 
-		navigate("/profile");
+			navigate("/profile");
+			props.alert("warning", "Successfully updated");
+		} else {
+			seterror(true);
+			props.alert("warning", "Experince must contain 5 characters");
+		}
 	};
 
 	return (
@@ -75,6 +85,7 @@ export default function Editblogs() {
 											className="input-field"
 											type="text"
 											name="Place"
+											required
 											value={blogs.Place}
 											onChange={change}
 										/>
@@ -87,19 +98,30 @@ export default function Editblogs() {
 							</div>
 							<div className="flex items-center lg:w-3/5 mx-auto  pb-10   sm:flex-row flex-col">
 								<div className="flex-grow sm:text-left text-center mt-6 sm:mt-0">
-									<h2 className=" text-2xl title-font font-medium mb-5">
+									<h2
+										className={` text-2xl title-font font-medium mb-5  ${
+											error ? "text-red-600" : ""
+										}`}>
 										Experince
 									</h2>
 									<div className="input-container">
 										<textarea
-											className="input-field h-40"
+											className={`${
+												error ? "input-field2" : "input-field"
+											} h-40`}
 											name="Experience"
 											value={blogs.Experience}
+											required
 											onChange={change}></textarea>
-										<label htmlFor="input-field" className="input-label">
+										<label
+											htmlFor={`${error ? "input-field2" : "input-field"} `}
+											className={`${error ? "input-label2" : "input-label"} `}>
 											Enter exeperience
 										</label>
-										<span className="input-highlight"></span>
+										<span
+											className={`${
+												error ? "input-highlight2" : "input-highlight"
+											} `}></span>
 									</div>
 								</div>
 							</div>
@@ -113,6 +135,7 @@ export default function Editblogs() {
 											className="input-field"
 											type="text"
 											name="Location"
+											required
 											value={blogs.Location}
 											onChange={change}
 										/>
@@ -133,6 +156,7 @@ export default function Editblogs() {
 											className="input-field"
 											type="number"
 											name="Cost"
+											required
 											value={blogs.Cost}
 											onChange={change}
 										/>
@@ -157,6 +181,7 @@ export default function Editblogs() {
 										<input
 											className="input-field"
 											type="text"
+											required
 											name="Place1"
 											value={blogs.Place1}
 											onChange={change}
@@ -174,6 +199,7 @@ export default function Editblogs() {
 											className="input-field"
 											type="text"
 											name="Place2"
+											required
 											value={blogs.Place2}
 											onChange={change}
 										/>
@@ -190,6 +216,7 @@ export default function Editblogs() {
 											className="input-field"
 											type="text"
 											name="Place3"
+											required
 											value={blogs.Place3}
 											onChange={change}
 										/>
@@ -206,6 +233,7 @@ export default function Editblogs() {
 											className="input-field"
 											type="text"
 											name="Place4"
+											required
 											value={blogs.Place4}
 											onChange={change}
 										/>

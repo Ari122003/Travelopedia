@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 const FormData = require("form-data");
 
-export default function Addblogs() {
+export default function Addblogs(props) {
 	const { addblogs } = useContext(context);
 
 	const [image, setimage] = useState();
@@ -33,21 +33,30 @@ export default function Addblogs() {
 			...blog,
 			[e.target.name]: e.target.value,
 		});
+
+		seterror(false);
 	};
+
+	const [error, seterror] = useState(false);
 
 	const submit = async (e) => {
 		e.preventDefault();
+		if (blog.Experience.length > 5) {
+			//    Image uploda
 
-		//    Image uploda
+			const form = new FormData();
+			form.append("file", image);
 
-		const form = new FormData();
-		form.append("file", image);
-
-		await axios.post("http://localhost:8000/upload", form).then((res) => {
-			// Data upload
-			addblogs(blog, res.data.filename);
-			navigate("/profile");
-		});
+			await axios.post("http://localhost:8000/upload", form).then((res) => {
+				// Data upload
+				addblogs(blog, res.data.filename);
+				navigate("/profile");
+				props.alert("warning", "Successfully added");
+			});
+		} else {
+			seterror(true);
+			props.alert("warning", "Experince must contain atleast 5 characters");
+		}
 	};
 	return (
 		<>
@@ -72,6 +81,7 @@ export default function Addblogs() {
 											className="input-field"
 											type="text"
 											name="Place"
+											required
 											onChange={change}
 										/>
 										<label htmlFor="input-field" className="input-label">
@@ -83,18 +93,29 @@ export default function Addblogs() {
 							</div>
 							<div className="flex items-center lg:w-3/5 mx-auto  pb-10   sm:flex-row flex-col">
 								<div className="flex-grow sm:text-left text-center mt-6 sm:mt-0">
-									<h2 className=" text-2xl title-font font-medium mb-5">
+									<h2
+										className={` text-2xl title-font font-medium mb-5  ${
+											error ? "text-red-600" : ""
+										}`}>
 										Experince
 									</h2>
 									<div className="input-container">
 										<textarea
-											className="input-field h-40"
+											className={`${
+												error ? "input-field2" : "input-field"
+											} h-40`}
 											name="Experience"
+											required
 											onChange={change}></textarea>
-										<label htmlFor="input-field" className="input-label">
+										<label
+											htmlFor={`${error ? "input-field2" : "input-field"} `}
+											className={`${error ? "input-label2" : "input-label"} `}>
 											Enter exeperience
 										</label>
-										<span className="input-highlight"></span>
+										<span
+											className={`${
+												error ? "input-highlight2" : "input-highlight"
+											} `}></span>
 									</div>
 								</div>
 							</div>
@@ -108,6 +129,7 @@ export default function Addblogs() {
 											className="input-field"
 											type="text"
 											name="Location"
+											required
 											onChange={change}
 										/>
 										<label htmlFor="input-field" className="input-label">
@@ -127,6 +149,7 @@ export default function Addblogs() {
 											className="input-field"
 											type="number"
 											name="Cost"
+											required
 											onChange={change}
 										/>
 										<label htmlFor="input-field" className="input-label">
@@ -151,6 +174,7 @@ export default function Addblogs() {
 											className="input-field"
 											type="text"
 											name="Place1"
+											required
 											onChange={change}
 										/>
 										<label htmlFor="input-field" className="input-label">
@@ -166,6 +190,7 @@ export default function Addblogs() {
 											className="input-field"
 											type="text"
 											name="Place2"
+											required
 											onChange={change}
 										/>
 										<label htmlFor="input-field" className="input-label">
@@ -181,6 +206,7 @@ export default function Addblogs() {
 											className="input-field"
 											type="text"
 											name="Place3"
+											required
 											onChange={change}
 										/>
 										<label htmlFor="input-field" className="input-label">
@@ -195,6 +221,7 @@ export default function Addblogs() {
 										<input
 											className="input-field"
 											type="text"
+											required
 											name="Place4"
 											onChange={change}
 										/>
