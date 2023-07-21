@@ -14,11 +14,15 @@ export default function Editprofile(props) {
 
 	const [image, setimage] = useState();
 
+	const [error, seterror] = useState(false);
+
 	const change = (e) => {
 		setdetails({
 			...details,
 			[e.target.name]: e.target.value,
 		});
+
+		seterror(false);
 	};
 
 	const fileupdload = (e) => {
@@ -27,13 +31,14 @@ export default function Editprofile(props) {
 
 	const submit = async (e) => {
 		e.preventDefault();
+
 		const form = new FormData();
 		form.append("file", image);
 
 		await axios
 			.post("http://localhost:8000/upload", form)
-			.then((res) => {
-				fetch("http://localhost:8000/api/user/updateuserdata", {
+			.then(async (res) => {
+				await fetch("http://localhost:8000/api/user/updateuserdata", {
 					method: "PUT",
 					headers: {
 						"Content-Type": "application/json",
@@ -45,13 +50,26 @@ export default function Editprofile(props) {
 						Image: res.data.filename,
 						id: localStorage.getItem("ID"),
 					}),
-				});
+				})
+					.then((res) => {
+						return res.json();
+					})
+					.then((res) => {
+						if (res.errors) {
+							props.showalert("warning", res.errors);
+							seterror(true);
+						} else {
+							navigate("/profile");
+							props.showalert("warning", "Successfully updated");
+						}
+					})
+					.catch(() => {
+						alert("Internal server error");
+					});
 			})
-			.catch((error) => {
-				console.log(error);
+			.catch(() => {
+				alert("Internal server error");
 			});
-
-		navigate("/profile");
 	};
 
 	useEffect(() => {
@@ -78,6 +96,7 @@ export default function Editprofile(props) {
 											className="input-field"
 											type="text"
 											name="Name"
+											required
 											value={details.Name}
 											onChange={change}
 										/>
@@ -90,14 +109,26 @@ export default function Editprofile(props) {
 							</div>
 							<div className="flex items-center lg:w-3/5 mx-auto  pb-10   sm:flex-row flex-col">
 								<div className="flex-grow sm:text-left text-center mt-6 sm:mt-0">
-									<h2 className=" text-2xl title-font font-medium mb-5">Bio</h2>
+									<h2
+										className={` text-2xl title-font font-medium mb-5 ${
+											error ? "text-red-600" : ""
+										}`}>
+										Bio
+									</h2>
 									<div className="input-container">
 										<textarea
-											className="input-field h-20"
+											className={`${
+												error ? "input-field2" : "input-field"
+											} h-20`}
 											value={details.Bio}
 											name="Bio"
+											required
 											onChange={change}></textarea>
-										<label htmlFor="input-field" className="input-label">
+										<label
+											htmlFor={`${error ? "input-field2" : "input-field"} `}
+											className={`${
+												error ? "input-label2" : "input-label"
+											} h-20`}>
 											Enter Bio
 										</label>
 										<span className="input-highlight"></span>

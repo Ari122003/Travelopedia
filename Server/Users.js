@@ -43,13 +43,14 @@ router.post(
 
 router.put(
 	"/updateuserdata",
-	[body("Bio", "Minimum Bio length is 5").isLength({ min: 5 })],
+	[body("Bio", "Minimum Bio length is 6").isLength({ min: 6 })],
 	async (req, res) => {
 		try {
 			const errors = validationResult(req);
 			if (!errors.isEmpty()) {
-				return res.status(400).json({
-					errors: "Bio should have atleast 5 caharacter",
+				res.status(400);
+				return res.json({
+					errors: "Bio should have atleast 6 caharacter",
 				});
 			}
 

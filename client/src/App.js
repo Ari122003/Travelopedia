@@ -10,6 +10,7 @@ import Editprofile from "./Components/Editprofile";
 import React, { useState } from "react";
 import Addblogs from "./Components/Addblogs";
 import Editblogs from "./Components/Editblogs";
+import Alerts from "./Components/Alerts";
 
 function App() {
 	const [details, setdetails] = useState({
@@ -34,14 +35,33 @@ function App() {
 			});
 	};
 
+	const [alert, setalert] = useState({
+		type: "",
+		message: "",
+		trigger: false,
+	});
+
+	const showalert = (type, message) => {
+		setalert({ type: type, message: message, trigger: true });
+
+		setTimeout(() => {
+			setalert({ type: type, message: message, trigger: false });
+		}, 3000);
+	};
+
 	return (
 		<>
-			<Navbar />
+			<Navbar showalert={showalert} />
+			<Alerts
+				type={alert.type}
+				message={alert.message}
+				trigger={alert.trigger}
+			/>
 
 			<Routes>
 				<Route exact path="/" element={<Home />} />
 				<Route exact path="/profile" element={<Account />} />
-				<Route exact path="/login" element={<Login />} />
+				<Route exact path="/login" element={<Login showalert={showalert} />} />
 				<Route exact path="/signup" element={<Signup />} />
 				<Route exact path="/about" element={<About />} />
 				<Route exact path="/addblogs" element={<Addblogs />} />
@@ -56,6 +76,7 @@ function App() {
 							Name={details.Name}
 							Bio={details.Bio}
 							showuser={showuser}
+							showalert={showalert}
 						/>
 					}
 				/>
