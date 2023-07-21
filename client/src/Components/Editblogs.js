@@ -55,11 +55,16 @@ export default function Editblogs(props) {
 				// Data upload
 
 				editblogs(blogs, res.data.filename);
-				setloader(false);
-			});
 
-			navigate("/profile");
-			props.alert("warning", "Successfully updated");
+				setTimeout(() => {
+					setloader(false);
+				}, 1000);
+
+				setTimeout(() => {
+					navigate("/profile");
+					props.alert("warning", "Successfully updated");
+				}, 1000);
+			});
 		} else {
 			setTimeout(() => {
 				setloader(false);

@@ -55,16 +55,27 @@ export default function Editprofile(props) {
 					}),
 				})
 					.then((res) => {
-						setloader(false);
 						return res.json();
 					})
 					.then((res) => {
 						if (res.errors) {
-							props.showalert("warning", res.errors);
-							seterror(true);
+							setTimeout(() => {
+								setloader(false);
+							}, 1000);
+
+							setTimeout(() => {
+								props.showalert("warning", res.errors);
+								seterror(true);
+							}, 1000);
 						} else {
-							navigate("/profile");
-							props.showalert("warning", "Successfully updated");
+							setTimeout(() => {
+								setloader(false);
+							}, 1000);
+
+							setTimeout(() => {
+								navigate("/profile");
+								props.showalert("warning", "Successfully updated");
+							}, 1000);
 						}
 					})
 					.catch(() => {

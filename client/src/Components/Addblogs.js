@@ -54,9 +54,14 @@ export default function Addblogs(props) {
 			await axios.post("http://localhost:8000/upload", form).then((res) => {
 				// Data upload
 				addblogs(blog, res.data.filename);
-				setloader(false);
-				navigate("/profile");
-				props.alert("warning", "Successfully added");
+				setTimeout(() => {
+					setloader(false);
+				}, 1000);
+
+				setTimeout(() => {
+					navigate("/profile");
+					props.alert("warning", "Successfully added");
+				}, 1000);
 			});
 		} else {
 			setTimeout(() => {
