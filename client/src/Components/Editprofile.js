@@ -16,6 +16,8 @@ export default function Editprofile(props) {
 
 	const [error, seterror] = useState(false);
 
+	const [loader, setloader] = useState(false);
+
 	const change = (e) => {
 		setdetails({
 			...details,
@@ -31,6 +33,7 @@ export default function Editprofile(props) {
 
 	const submit = async (e) => {
 		e.preventDefault();
+		setloader(true);
 
 		const form = new FormData();
 		form.append("file", image);
@@ -52,6 +55,7 @@ export default function Editprofile(props) {
 					}),
 				})
 					.then((res) => {
+						setloader(false);
 						return res.json();
 					})
 					.then((res) => {
@@ -150,6 +154,12 @@ export default function Editprofile(props) {
 
 										<span className="input-highlight"></span>
 									</div>
+								</div>
+							</div>
+
+							<div className="flex justify-center">
+								<div className={loader ? "" : "hidden"}>
+									<div className="spinner"></div>
 								</div>
 							</div>
 

@@ -6,11 +6,15 @@ import axios from "axios";
 const FormData = require("form-data");
 
 export default function Editblogs(props) {
-	const [image, setimage] = useState();
-
 	const { blog, editblogs } = useContext(context);
 
 	const navigate = useNavigate();
+
+	const [image, setimage] = useState();
+
+	const [loader, setloader] = useState(false);
+
+	const [error, seterror] = useState(false);
 
 	const [blogs, setblogs] = useState({
 		Place: blog.Place,
@@ -23,8 +27,6 @@ export default function Editblogs(props) {
 		Place4: blog.Place4,
 		Id: blog.Id,
 	});
-
-	const [error, seterror] = useState(false);
 
 	const change = (e) => {
 		setblogs({
@@ -41,6 +43,7 @@ export default function Editblogs(props) {
 
 	const submit = async (e) => {
 		e.preventDefault();
+		setloader(true);
 
 		if (blogs.Experience.length > 5) {
 			// Image upload
@@ -52,13 +55,20 @@ export default function Editblogs(props) {
 				// Data upload
 
 				editblogs(blogs, res.data.filename);
+				setloader(false);
 			});
 
 			navigate("/profile");
 			props.alert("warning", "Successfully updated");
 		} else {
-			seterror(true);
-			props.alert("warning", "Experince must contain 5 characters");
+			setTimeout(() => {
+				setloader(false);
+			}, 1000);
+
+			setTimeout(() => {
+				seterror(true);
+				props.alert("warning", "Experince must contain atleast 5 characters");
+			}, 1000);
 		}
 	};
 
@@ -259,6 +269,12 @@ export default function Editblogs(props) {
 
 										<span className="input-highlight"></span>
 									</div>
+								</div>
+							</div>
+
+							<div className="flex justify-center">
+								<div className={loader ? "" : "hidden"}>
+									<div className="spinner"></div>
 								</div>
 							</div>
 

@@ -16,6 +16,8 @@ export default function Addblogs(props) {
 
 	let navigate = useNavigate();
 
+	const [loader, setloader] = useState(false);
+
 	const [blog, setblog] = useState({
 		Place: "",
 		Location: "",
@@ -41,6 +43,8 @@ export default function Addblogs(props) {
 
 	const submit = async (e) => {
 		e.preventDefault();
+		setloader(true);
+
 		if (blog.Experience.length > 5) {
 			//    Image uploda
 
@@ -50,12 +54,19 @@ export default function Addblogs(props) {
 			await axios.post("http://localhost:8000/upload", form).then((res) => {
 				// Data upload
 				addblogs(blog, res.data.filename);
+				setloader(false);
 				navigate("/profile");
 				props.alert("warning", "Successfully added");
 			});
 		} else {
-			seterror(true);
-			props.alert("warning", "Experince must contain atleast 5 characters");
+			setTimeout(() => {
+				setloader(false);
+			}, 1000);
+
+			setTimeout(() => {
+				seterror(true);
+				props.alert("warning", "Experince must contain atleast 5 characters");
+			}, 1000);
 		}
 	};
 	return (
@@ -247,6 +258,12 @@ export default function Addblogs(props) {
 
 										<span className="input-highlight"></span>
 									</div>
+								</div>
+							</div>
+
+							<div className="flex justify-center">
+								<div className={loader ? "" : "hidden"}>
+									<div className="spinner"></div>
 								</div>
 							</div>
 
