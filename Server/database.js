@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
-mongoose.set('strictQuery', true);
-const url = "mongodb://127.0.0.1:27017/Travelopedia";
+mongoose.set("strictQuery", true);
+
+const url =
+	"mongodb+srv://Aritra:Aritra%402003@travelopedia-database.jcf4k8m.mongodb.net/";
 
 const connect = async () => {
 	await mongoose.connect(url).then(() => {
@@ -8,5 +10,4 @@ const connect = async () => {
 	});
 };
 
-
-module.exports= connect
+module.exports = connect;
