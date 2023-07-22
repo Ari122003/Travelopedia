@@ -24,6 +24,8 @@ export default function Navbar(props) {
 			<header className=" sticky top-0 body-font z-10 " id="nav">
 				<div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
 					<a className="flex title-font font-medium items-center text-white mb-4 md:mb-0">
+						<img src="logo.png" alt="logo" className="h-10 w-10 " />
+
 						<span className="ml-3 name">Travelopedia</span>
 					</a>
 					<nav className="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-100	flex flex-wrap items-center text-base justify-center">

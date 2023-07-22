@@ -93,6 +93,9 @@ export default function Editprofile(props) {
 
 	return (
 		<>
+			<h1 id="blog" className="text-center">
+				Edit profile
+			</h1>
 			<div className="container px-10 py-10">
 				<form
 					onSubmit={submit}
