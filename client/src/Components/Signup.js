@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import auth from "./Firebase";
 import Footer from "./Footer";
 
-export default function Signup() {
+export default function Signup(props) {
 	const [details, setdetails] = useState({
 		Name: "",
 		Email: "",
@@ -24,6 +24,9 @@ export default function Signup() {
 			...details,
 			[e.target.name]: e.target.value,
 		});
+
+		seterror(false);
+		seterror1(false);
 	};
 
 	const submit = async (e) => {
@@ -40,8 +43,10 @@ export default function Signup() {
 					setloader(false);
 					localStorage.setItem("Token", response.user.uid);
 					navigate("/");
+					props.alert("warning", "Successfully registered");
 				})
 				.catch(() => {
+					props.alert("warning", "User already exists");
 					setloader(false);
 					seterror(true);
 				});
