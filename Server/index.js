@@ -21,7 +21,7 @@ const storage = multer.diskStorage({
 	destination: (req, file, func) => {
 		func(
 			null,
-			"/Uploads"
+			"./Uploads"
 		);
 	},
 	filename: (req, file, func) => {
