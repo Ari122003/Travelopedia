@@ -4,7 +4,11 @@
   "description": "Your travel encyclopedia",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "serve": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm install",
+		"start": "node index.js",
+		"dev": "nodemon index.js"
   },
   "author": "",
   "license": "ISC",
