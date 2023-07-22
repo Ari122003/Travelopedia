@@ -21,7 +21,7 @@ const storage = multer.diskStorage({
 	destination: (req, file, func) => {
 		func(
 			null,
-			"C:/Users/Hp/OneDrive/Desktop/Program files/Web Development/React JS/Travelopedia/Server/Uploads"
+			"/Uploads"
 		);
 	},
 	filename: (req, file, func) => {
