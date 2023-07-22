@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import auth from "./Firebase";
@@ -68,7 +68,7 @@ export default function Signup(props) {
 		seterror(false);
 		seterror1(false);
 
-		if (details.Password != details.cpassword) {
+		if (details.Password !== details.cpassword) {
 			seterror1(true);
 		} else {
 			seterror1(false);
@@ -80,7 +80,7 @@ export default function Signup(props) {
 			<div className="container py-20">
 				<form onSubmit={submit}>
 					<div className="card mx-auto">
-						<a className="singup">Sign Up</a>
+						<h1 className="singup">Sign Up</h1>
 						<div className="inputBox1">
 							<input
 								type="text"

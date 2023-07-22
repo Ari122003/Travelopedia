@@ -4,28 +4,25 @@ export default function Footer() {
 	return (
 		<footer className=" body-font" id="nav">
 			<div className="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
-				<a className="flex title-font font-medium items-center md:justify-start justify-center text-white">
+				<div className="flex title-font font-medium items-center md:justify-start justify-center text-white">
 					<img src="logo.png" alt="logo" className="h-10 w-10" />
 
 					<span className="ml-3 text-xl name">Travelopedia</span>
-				</a>
+				</div>
 				<p
 					className=" sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-800 sm:py-2 sm:mt-0 mt-4"
 					id="navlink">
 					Developed by-
-					<a
-						className=" ml-1"
-						id="navlink"
-						target="_blank"
-						rel="noopener noreferrer">
+					<label className=" ml-1" id="navlink" target="_blank">
 						Aritra Adhikary
-					</a>
+					</label>
 				</p>
 				<span className="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
 					<a
 						className="text-white"
 						href="https://www.facebook.com/aritra.adhikary.142?mibextid=ZbWKwL"
-						target="_blank">
+						target="_blank"
+						rel="noreferrer">
 						<svg
 							fill="currentColor"
 							strokeLinecap="round"
@@ -40,7 +37,8 @@ export default function Footer() {
 					<a
 						className="ml-3 text-white"
 						href="https://www.instagram.com/_adhikary.com_/"
-						target="_blank">
+						target="_blank"
+						rel="noreferrer">
 						<svg
 							fill="none"
 							stroke="currentColor"
@@ -56,7 +54,8 @@ export default function Footer() {
 					<a
 						className="ml-3 text-white"
 						href="https://www.linkedin.com/in/aritra12/"
-						target="_blank">
+						target="_blank"
+						rel="noreferrer">
 						<svg
 							fill="currentColor"
 							stroke="currentColor"
